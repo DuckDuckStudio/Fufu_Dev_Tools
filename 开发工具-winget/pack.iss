@@ -1,7 +1,7 @@
 [Setup]
 AppName=芙芙工具箱开发工具包
-AppVersion=202406242036
-VersionInfoVersion=202406242036
+AppVersion=2024.06.24.2036
+VersionInfoVersion=2024.06.24.2036
 AppPublisher=DuckStudio
 VersionInfoCopyright=Copyright (c) 鸭鸭「カモ」
 AppPublisherURL=https://duckduckstudio.github.io/yazicbs.github.io/Tools/Fufu_Tools/wiki/Dev/
@@ -30,4 +30,4 @@ Name: "{group}\芙芙工具箱开发工具包"; Filename: "{app}\Script\ffdev.ex
 Filename: "{sys}\cmd.exe"; Parameters: "/C setx PATH ""{app}\Script;%PATH%"" /M"; Flags: runhidden
 
 [UninstallRun]
-Filename: "{sys}\cmd.exe"; Parameters: "/C setx PATH ""%PATH:{app}\Script;=%"" /M"; Flags: runhidden
+Filename: "{sys}\cmd.exe"; Parameters: "/C setx PATH ""%PATH:{app}\Script;=%"" /M"; Flags: runhidden; RunOnceId: UninstallSetPath
