@@ -8,7 +8,7 @@ AppPublisherURL=https://duckduckstudio.github.io/yazicbs.github.io/Tools/Fufu_To
 DefaultDirName={autopf}\Fufu_Dev_Tools
 DefaultGroupName=芙芙工具箱开发工具包
 UninstallDisplayIcon={app}\Script\ffdev.exe
-OutputDir=D:\Duckhome\projects\MSVS\Source\Repos\Fufu_Dev_Tools\开发工具-winget\version\
+OutputDir=D:\Duckhome\projects\MSVS\Source\Repos\Fufu_Dev_Tools\开发工具-winget\version\安装包\
 OutputBaseFilename=Fufu_Dev_Tools_Setup_202406242036
 SetupIconFile=D:\Duckhome\projects\MSVS\Source\Repos\Fufu_Tools\ico.ico
 LicenseFile=D:\Duckhome\projects\MSVS\Source\Repos\Fufu_Dev_Tools\开发工具-winget\LICENSE
@@ -22,6 +22,11 @@ Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
 
 [Files]
 Source: "D:\Duckhome\projects\MSVS\Source\Repos\Fufu_Dev_Tools\开发工具-winget\version\202406242036\*"; DestDir: "{app}"
+Source: "D:\Duckhome\projects\MSVS\Source\Repos\Fufu_Dev_Tools\开发工具-winget\version\202406242036\git\*"; DestDir: "{app}\git"
+Source: "D:\Duckhome\projects\MSVS\Source\Repos\Fufu_Dev_Tools\开发工具-winget\version\202406242036\Script\*"; DestDir: "{app}\Script"
+Source: "D:\Duckhome\projects\MSVS\Source\Repos\Fufu_Dev_Tools\开发工具-winget\version\202406242036\代码校对\*"; DestDir: "{app}\代码校对"
+Source: "D:\Duckhome\projects\MSVS\Source\Repos\Fufu_Dev_Tools\开发工具-winget\version\202406242036\生成工具\*"; DestDir: "{app}\生成工具"
+Source: "D:\Duckhome\projects\MSVS\Source\Repos\Fufu_Dev_Tools\开发工具-winget\version\202406242036\统计\*"; DestDir: "{app}\统计"
 
 [Icons]
 Name: "{group}\芙芙工具箱开发工具包"; Filename: "{app}\Script\ffdev.exe"
