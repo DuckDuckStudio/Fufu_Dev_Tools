@@ -24,12 +24,13 @@ def main():
         "代码行数": "统计/代码总行数.exe",
         "账号切换": "git/账号切换.exe",
         "连续push": "git/连续push尝试.exe",
-        "连续pull": "git/连续pull尝试.exe"
+        "连续pull": "git/连续pull尝试.exe",
+        "git连续尝试": "git/git连续尝试.exe"
     }
 
     if program not in scripts:
         print(f"{Fore.RED}✕{Fore.RESET} 无效的程序调用")
-        print(f"{Fore.BLUE}[!]{Fore.RESET} 可用程序: [总调用] [目录复制] [参数查重] [非UTF-8编码] [尾随空格] [需求生成] [代码行数] [账号切换] [连续push] [连续pull]")
+        print(f"{Fore.BLUE}[!]{Fore.RESET} 可用程序: [总调用] [目录复制] [参数查重] [非UTF-8编码] [尾随空格] [需求生成] [代码行数] [账号切换] [连续push] [连续pull] [git连续尝试]")
         return
 
     program_path = os.path.join(parent_dir, scripts[program])
