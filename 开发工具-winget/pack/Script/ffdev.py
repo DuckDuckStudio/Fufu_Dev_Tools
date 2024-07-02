@@ -3,6 +3,8 @@ import sys
 from colorama import init, Fore
 init(autoreset=True)
 
+version = "2024.07.02.1330"
+
 def main():
     if len(sys.argv) < 2:
         print("Usage: ffdev <工具> <命令> [<参数>...]")
@@ -27,6 +29,10 @@ def main():
         "连续pull": "git/连续pull尝试.exe",
         "git连续尝试": "git/git连续尝试.exe"
     }
+
+    if program in ["ver", "版本", "version", "Version", "--version", "--ver", "-v"]:
+        print(f"{Fore.GREEN}✓{Fore.RESET} Version {version}")
+        return
 
     if program not in scripts:
         print(f"{Fore.RED}✕{Fore.RESET} 无效的程序调用")
