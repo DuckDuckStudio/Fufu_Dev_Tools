@@ -3,7 +3,7 @@ import sys
 from colorama import init, Fore
 init(autoreset=True)
 
-version = "2024.07.02.1330"
+version = "2024.07.03.0000"
 
 def main():
     if len(sys.argv) < 2:
@@ -46,7 +46,7 @@ def main():
         return
 
     command_args = [command] + input_args
-    os.system(f"{program_path} {' '.join(command_args)}")
+    os.system(f'"{program_path}" {" ".join(command_args)}')
 
 if __name__ == "__main__":
     main()
