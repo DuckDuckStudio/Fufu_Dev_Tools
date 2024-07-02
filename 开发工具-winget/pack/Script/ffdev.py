@@ -17,8 +17,6 @@ def main():
     parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0])))
 
     scripts = {
-        "总调用": "总调用.exe",
-        "目录复制": "目录复制.exe",
         "参数查重": "代码校对/参数查重.exe",
         "非UTF-8编码": "代码校对/非UTF-8编码.exe",
         "尾随空格": "代码校对/尾随空格.exe",
