@@ -9,8 +9,6 @@ from colorama import init, Fore
 
 # --- init ---
 init(autoreset=True)
-root = tk.Tk()
-root.withdraw()
 script_path = os.path.dirname(os.path.abspath(sys.argv[0]))
 os.chdir(script_path)
 # ------------
@@ -42,6 +40,8 @@ def main():
     if result.returncode == 0:
         working_dir = script_path
     else:
+        root = tk.Tk()
+        root.withdraw()
         print(f"{Fore.BLUE}?{Fore.RESET} 请选择仓库目录", end="")
         working_dir = filedialog.askdirectory()
         print(f"\r{Fore.GREEN}✓{Fore.RESET} 选择的仓库目录: {working_dir}")
