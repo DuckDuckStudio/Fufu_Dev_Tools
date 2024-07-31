@@ -162,4 +162,4 @@ cython_debug/
 #.idea/
 
 # winget version
-独立开发工具包/version
+pack.iss
