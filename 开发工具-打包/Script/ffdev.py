@@ -3,7 +3,7 @@ import sys
 from colorama import init, Fore
 init(autoreset=True)
 
-version = "2024.08.01.0000"
+version = "2024.08.04.2345"
 
 def main():
     if len(sys.argv) < 2:
@@ -37,7 +37,7 @@ def main():
         print(f"{Fore.BLUE}[!]{Fore.RESET} 可用程序: [总调用] [目录复制] [参数查重] [非UTF-8编码] [尾随空格] [需求生成] [代码行数] [账号切换] [连续push] [连续pull] [git连续尝试]")
         return
 
-    program_path = os.path.join(parent_dir, scripts[program])
+    program_path = os.path.normpath(os.path.join(parent_dir, scripts[program]))
 
     if not os.path.isfile(program_path):
         print(f"{Fore.RED}✕{Fore.RESET} 缺少工具 {Fore.BLUE}{program_path}{Fore.RESET} !\n{Fore.YELLOW}⚠{Fore.RESET} 尝试重新安装程序以解决该问题")
