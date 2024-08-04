@@ -3,7 +3,7 @@ import sys
 from colorama import init, Fore
 init(autoreset=True)
 
-version = "2024.08.04.2345"
+version = "2024.08.05.0100"
 
 def main():
     if len(sys.argv) < 2:
@@ -25,7 +25,8 @@ def main():
         "账号切换": "git/账号切换.exe",
         "连续push": "git/连续push尝试.exe",
         "连续pull": "git/连续pull尝试.exe",
-        "git连续尝试": "git/git连续尝试.exe"
+        "git连续尝试": "git/git连续尝试.exe",
+        "目录复制": "目录复制.exe"
     }
 
     if program in ["ver", "版本", "version", "Version", "--version", "--ver", "-v"]:
