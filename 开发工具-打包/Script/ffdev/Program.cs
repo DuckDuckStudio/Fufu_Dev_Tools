@@ -37,8 +37,6 @@ namespace FFDev
             string[] inputArgs = new string[args.Length - 2];
             Array.Copy(args, 2, inputArgs, 0, inputArgs.Length);
 
-            string parentDir = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetFullPath(Environment.GetCommandLineArgs()[0])));
-
             if (IsVersionCommand(program))
             {
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -57,7 +55,12 @@ namespace FFDev
                 return;
             }
 
+
+            string parentDir = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetFullPath(Environment.GetCommandLineArgs()[0])));
+            Console.WriteLine(parentDir);
             string programPath = Path.Combine(parentDir, value);
+            Console.WriteLine(programPath);
+            Console.ReadKey();
 
             if (!File.Exists(programPath))
             {
