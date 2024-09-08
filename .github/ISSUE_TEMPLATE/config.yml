@@ -5,7 +5,7 @@ contact_links:
     about: 你对某事感到疑惑？发起一个新的讨论以向社区寻求答案。
   - name: 提交芙芙工具箱(非开发工具)相关问题
     url: https://github.com/DuckDuckStudio/Fufu_Tools/issues
-    about: 请前往这里提交关于独立开发工具包的相关问题
+    about: 请前往这里提交关于芙芙工具箱的其他问题
   - name: 查看已经打开的问题
     url: https://github.com/DuckDuckStudio/Fufu_Dev_Tools/issues
     about: 请确认你的问题没有与已存在的问题重复。
