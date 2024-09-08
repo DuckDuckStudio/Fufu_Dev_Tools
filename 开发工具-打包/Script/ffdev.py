@@ -3,7 +3,7 @@ import sys
 from colorama import init, Fore
 init(autoreset=True)
 
-version = "2024.08.04.2345"
+version = "2024.09.08.2000"
 
 def main():
     if len(sys.argv) < 2:
