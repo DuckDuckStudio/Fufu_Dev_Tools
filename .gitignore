@@ -195,3 +195,6 @@ bld/
 
 # Visual Studio 2019 directories which contain build results, logs, or module files
 .vs/
+
+# Pack
+开发工具-打包-done/
