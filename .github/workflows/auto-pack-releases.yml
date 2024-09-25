@@ -1,7 +1,5 @@
 name: Pack Releases
 
-# 2格缩进
-
 on:
   workflow_dispatch:
 
