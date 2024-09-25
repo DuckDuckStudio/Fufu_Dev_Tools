@@ -1,0 +1,61 @@
+name: Pack Releases
+
+on:
+  workflow_dispatch:
+
+jobs:
+  auto-pack-releases:
+    runs-on: windows-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 配置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 克隆主仓库
+        run: |
+          git clone https://github.com/DuckDuckStudio/Fufu_Tools.git
+
+      - name: 安装依赖
+        # 包括开发工具包与打包工具的依赖
+        run: |
+          pip install -r requirements.txt
+          pip install pyinstaller
+          pip list
+
+      - name: 构建发行版
+        # 整理文件 > 打包 > 压缩
+        env:
+          PYTHONIOENCODING: utf-8
+        run: |
+          xcopy "开发工具-打包" "开发工具-打包-done" /E /I
+          echo ========================================
+          python 自动化脚本\Auto-Pack-Pyinstaller.py
+          echo ========================================
+          mkdir 构建文件
+          7z a "构建文件\Fufu_Tools_Dev_Tools.zip" "开发工具-源码"
+          7z a "构建文件\Fufu_Tools_Dev_Tools.7z" "开发工具-源码"
+          copy "packaging_log.log" "构建文件\打包日志.log"
+          copy "LICENSE" "构建文件\LICENSE"
+          echo ========================================
+          tree /a /f
+
+      - name: 配置 Inno 中文翻译
+        run: |
+          curl -o "C:\Program Files (x86)\Inno Setup 6\Languages\ChineseSimplified.isl" "https://raw.githubusercontent.com/jrsoftware/issrc/main/Files/Languages/Unofficial/ChineseSimplified.isl"
+
+      - name: 构建安装程序
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.4
+        with:
+          path: pack.iss
+          options: /O+
+
+      - name: 上传构建文件
+        uses: actions/upload-artifact@v4
+        with:
+          name: 构建文件
+          path: 构建文件\**
