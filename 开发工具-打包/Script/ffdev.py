@@ -3,7 +3,7 @@ import sys
 from colorama import init, Fore
 init(autoreset=True)
 
-version = "2024.09.08.2000"
+version = "2024.09.26.2000"
 
 def main():
     if len(sys.argv) < 2:
@@ -29,11 +29,12 @@ def main():
     }
 
     if program in ["ver", "版本", "version", "Version", "--version", "--ver", "-v"]:
-        print(f"{Fore.GREEN}✓{Fore.RESET} Version {version}")
+        print(f"{Fore.GREEN}✓{Fore.RESET} 版本: {version}")
+        print(f"{Fore.GREEN}✓{Fore.RESET} 安装在: {parent_dir}")
         return
 
     if program not in scripts:
-        print(f"{Fore.RED}✕{Fore.RESET} 无效的程序调用")
+        print(f"{Fore.YELLOW}⚠{Fore.RESET} 无效的程序调用")
         print(f"{Fore.BLUE}[!]{Fore.RESET} 可用程序: [总调用] [目录复制] [参数查重] [非UTF-8编码] [尾随空格] [需求生成] [代码行数] [账号切换] [连续push] [连续pull] [git连续尝试]")
         return
 
