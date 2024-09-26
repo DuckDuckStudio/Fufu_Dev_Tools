@@ -1,14 +1,12 @@
 import os
+import sys
 import time
 import subprocess
-import tkinter as tk
 from plyer import notification
 from tkinter import filedialog
 from colorama import init, Fore
 
-# --- init ---
 init(autoreset=True)
-# ------------
 
 def run_commits(working_dir, command):
     result = subprocess.run(command, shell=True, capture_output=True, text=True, cwd=working_dir)
@@ -32,17 +30,21 @@ def is_network_error(stderr): # 判断错误类型
     return False
 
 def main():
+    exit_code = 0
+    
     result = subprocess.run(['git', 'rev-parse', '--is-inside-work-tree'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     if result.returncode == 0:
         working_dir = os.getcwd()
         print(f"\r{Fore.GREEN}✓{Fore.RESET} 已自动选择仓库目录: {working_dir}")
     else:
-        root = tk.Tk()
-        root.withdraw()
         print(f"{Fore.BLUE}?{Fore.RESET} 请选择仓库目录", end="")
         working_dir = filedialog.askdirectory()
-        print(f"\r{Fore.GREEN}✓{Fore.RESET} 选择的仓库目录: {working_dir}")
+        if working_dir:
+            print(f"\r{Fore.GREEN}✓{Fore.RESET} 选择的仓库目录: {working_dir}")
+        else:
+            print(f"{Fore.RED}✕{Fore.RESET} 没有指定仓库目录！")
+            return 1 # 直接炸
     
     command = input("请输入需要执行的命令: ")
 
@@ -56,7 +58,7 @@ def main():
             else:
                 print(f"{Fore.GREEN}✓{Fore.RESET} 已设置间隔时间: {time_counter}")
                 break
-        except ValueError as e:
+        except ValueError:
             print(f"{Fore.RED}✕{Fore.RESET} 输入的值不合法，必须为一个正整数！")
     
     counter = 0
@@ -92,9 +94,10 @@ def main():
             t = input("请确认是否继续尝试: ")
             if t.lower() not in ["y", "yes", "是", "继续", "确认"]:
                 print(f"{Fore.RED}✕{Fore.RESET} 由于检测到非网络错误，已终止程序")
+                exit_code = 1
                 break
     print(f"{Fore.BLUE}[info]{Fore.RESET} 一共执行了 {Fore.BLUE}{counter}{Fore.RESET} 次命令")
+    return exit_code
 
 if __name__ == "__main__":
-    main()
-    input ("按Enter键退出...")
+    sys.exit(main())
