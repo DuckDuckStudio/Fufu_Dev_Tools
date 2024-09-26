@@ -8,6 +8,13 @@ from colorama import init, Fore
 init(autoreset=True)
 
 def switch_git_config(alias, fast_switch=False, switch_name=True, switch_email=True):
+    is_global = subprocess.run(['git', 'rev-parse', '--is-inside-work-tree'], stdout=subprocess.PIPE, stderr=subprocess.PIPE).returncode != 0
+    
+    config_scope = '--global' if is_global else '--local'
+    # 全局 或 本地 | 系统 > 全局 > 本地
+    scope_msg = "全局配置" if is_global else "配置仅限于本仓库目录"
+    print(f"\r{Fore.BLUE}[!]{Fore.RESET} {scope_msg}")
+
     script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
     accounts_file = os.path.join(script_dir, 'accounts.json')
     
@@ -38,14 +45,14 @@ def switch_git_config(alias, fast_switch=False, switch_name=True, switch_email=T
     
     # 设置Git配置
     if switch_name:
-        result = subprocess.run(['git', 'config', 'user.name', user_info['name']])
+        result = subprocess.run(['git', 'config', config_scope, 'user.name', user_info['name']])
         if result.returncode == 0:
             print(f'{Fore.GREEN}✓{Fore.RESET} 已切换Git用户名：{user_info["name"]}')
         else:
             print(f'{Fore.RED}✕{Fore.RESET} 切换失败: {Fore.RED}{result.stderr}{Fore.RESET}')
             return 1
     if switch_email:
-        result = subprocess.run(['git', 'config', 'user.email', user_info['email']])
+        result = subprocess.run(['git', 'config', config_scope, 'user.email', user_info['email']])
         if result.returncode == 0:
             print(f'{Fore.GREEN}✓{Fore.RESET} 已切换Git邮箱：{user_info["email"]}')
         else:
