@@ -6,6 +6,10 @@ os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
 
 print(f"[!] 将使用 Pyinstaller 打包。")
 
+# UPX flag = 1
+# 如在本地测试请移除 --upx-dir "upx-latest"
+# 在代码中是 --upx-dir \"upx-latest\"
+
 # 计数
 fail = 0 # 失败的文件个数
 countd = 0 # 已删除的文件个数
@@ -70,14 +74,14 @@ def package_py(file_path, file_name, log_file="None"):
         if file_name in ["连续push尝试.py", "连续pull尝试.py", "git连续尝试.py"]:
             print(f"[WARNING] 使用notification！")
             if icon_path == "None":
-                command = f"pyinstaller --hidden-import plyer.platforms.win.notification --onefile --distpath={output_dir} {file_path}"
+                command = f"pyinstaller --upx-dir \"upx-latest\" --hidden-import plyer.platforms.win.notification --onefile --distpath={output_dir} {file_path}"
             else:
-                command = f"pyinstaller --hidden-import plyer.platforms.win.notification --onefile -i \"{icon_path}\" --distpath={output_dir} {file_path}"
+                command = f"pyinstaller --upx-dir \"upx-latest\" --hidden-import plyer.platforms.win.notification --onefile -i \"{icon_path}\" --distpath={output_dir} {file_path}"
         else:
             if icon_path == "None":
-                command = f"pyinstaller --onefile --distpath=\"{output_dir}\" \"{file_path}\""
+                command = f"pyinstaller --upx-dir \"upx-latest\" --onefile --distpath=\"{output_dir}\" \"{file_path}\""
             else:
-                command = f"pyinstaller --onefile -i \"{icon_path}\" --distpath=\"{output_dir}\" \"{file_path}\""
+                command = f"pyinstaller --upx-dir \"upx-latest\" --onefile -i \"{icon_path}\" --distpath=\"{output_dir}\" \"{file_path}\""
         subprocess.run(command, shell=True, check=True)
         if log_file != "None":
             log_message(f"打包完成: {file_path}", log_file)
@@ -106,14 +110,14 @@ def package_pyw(file_path, file_name, log_file="None"):
         if file_name in ["目录复制.pyw"]:
             print(f"[WARNING] 使用notification！")
             if icon_path == "None":
-                command = f"pyinstaller --hidden-import plyer.platforms.win.notification --noconsole --onefile --distpath={output_dir} {file_path}"
+                command = f"pyinstaller --upx-dir \"upx-latest\" --hidden-import plyer.platforms.win.notification --noconsole --onefile --distpath={output_dir} {file_path}"
             else:
-                command = f"pyinstaller --hidden-import plyer.platforms.win.notification --noconsole --onefile -i \"{icon_path}\" --distpath={output_dir} {file_path}"
+                command = f"pyinstaller --upx-dir \"upx-latest\" --hidden-import plyer.platforms.win.notification --noconsole --onefile -i \"{icon_path}\" --distpath={output_dir} {file_path}"
         else:
             if icon_path == "None":
-                command = f"pyinstaller --onefile --noconsole --distpath={output_dir} {file_path}"
+                command = f"pyinstaller --upx-dir \"upx-latest\" --onefile --noconsole --distpath={output_dir} {file_path}"
             else:
-                command = f"pyinstaller --onefile --noconsole -i \"{icon_path}\" --distpath={output_dir} {file_path}"
+                command = f"pyinstaller --upx-dir \"upx-latest\" --onefile --noconsole -i \"{icon_path}\" --distpath={output_dir} {file_path}"
         subprocess.run(command, shell=True, check=True)
         if log_file != "None":
             log_message(f"打包完成：{file_path}", log_file)

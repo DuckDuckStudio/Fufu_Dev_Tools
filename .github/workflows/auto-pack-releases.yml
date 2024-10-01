@@ -1,4 +1,5 @@
 name: Pack Releases
+# 用的是 PowerShell
 
 on:
   workflow_dispatch:
@@ -26,6 +27,11 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller
           pip list
+          echo ========================================
+          $upx_url = (Invoke-WebRequest -Uri https://api.github.com/repos/upx/upx/releases/latest).Content | ConvertFrom-Json | Select-Object -ExpandProperty assets | Where-Object { $_.name -like "*win64.zip" } | Select-Object -ExpandProperty browser_download_url
+          Write-Host "[INFO] Latest UPX download URL: $upx_url"
+          Invoke-WebRequest -Uri $upx_url -OutFile "upx-latest.zip"
+          7z x "upx-latest.zip" -o"."
 
       - name: 构建发行版
         # 整理文件 > 打包 > 压缩
@@ -46,7 +52,7 @@ jobs:
 
       - name: 配置 Inno 中文翻译
         run: |
-          curl -o "C:\Program Files (x86)\Inno Setup 6\Languages\ChineseSimplified.isl" "https://raw.githubusercontent.com/jrsoftware/issrc/main/Files/Languages/Unofficial/ChineseSimplified.isl"
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jrsoftware/issrc/main/Files/Languages/Unofficial/ChineseSimplified.isl" -OutFile "C:\Program Files (x86)\Inno Setup 6\Languages\ChineseSimplified.isl"
 
       - name: 构建安装程序
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.4
