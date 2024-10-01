@@ -34,7 +34,7 @@ jobs:
         run: |
           xcopy "开发工具-打包" "开发工具-打包-done" /E /I
           echo ========================================
-          python 自动化脚本\Auto-Pack-Pyinstaller.py
+          python "自动化脚本\Auto-Pack-Pyinstaller.py"
           echo ========================================
           mkdir 构建文件
           7z a "构建文件\Fufu_Tools_Dev_Tools.zip" "开发工具-源码"

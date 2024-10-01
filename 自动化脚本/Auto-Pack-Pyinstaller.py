@@ -59,7 +59,7 @@ def log_message(message, log_file):
     log_file.write("-" * 50 + "\n") # 添加分隔线
 
 # 函数：打包 Python 文件
-def package_py(file_path, log_file="None"):
+def package_py(file_path, file_name, log_file="None"):
     global fcount
     global fail
     try:
@@ -67,10 +67,17 @@ def package_py(file_path, log_file="None"):
             log_message(f"\n开始打包：{file_path}", log_file)
         print(f"\n[PACK INFO] 开始打包：{file_path}")
         output_dir = os.path.dirname(file_path) # 设置输出目录为 Python 文件所在目录
-        if icon_path == "None":
-            command = f"pyinstaller --onefile --distpath=\"{output_dir}\" \"{file_path}\""
+        if file_name in ["连续push尝试.py", "连续pull尝试.py", "git连续尝试.py"]:
+            print(f"[WARNING] 使用notification！")
+            if icon_path == "None":
+                command = f"pyinstaller --hidden-import plyer.platforms.win.notification --onefile --distpath={output_dir} {file_path}"
+            else:
+                command = f"pyinstaller --hidden-import plyer.platforms.win.notification --onefile -i \"{icon_path}\" --distpath={output_dir} {file_path}"
         else:
-            command = f"pyinstaller --onefile -i \"{icon_path}\" --distpath=\"{output_dir}\" \"{file_path}\""
+            if icon_path == "None":
+                command = f"pyinstaller --onefile --distpath=\"{output_dir}\" \"{file_path}\""
+            else:
+                command = f"pyinstaller --onefile -i \"{icon_path}\" --distpath=\"{output_dir}\" \"{file_path}\""
         subprocess.run(command, shell=True, check=True)
         if log_file != "None":
             log_message(f"打包完成: {file_path}", log_file)
@@ -88,7 +95,7 @@ def package_py(file_path, log_file="None"):
         return file_path
 
 # 函数：打包 Pythonw 文件
-def package_pyw(file_path, log_file="None"):
+def package_pyw(file_path, file_name, log_file="None"):
     global fcount
     global fail
     try:
@@ -96,10 +103,17 @@ def package_pyw(file_path, log_file="None"):
             log_message(f"\n开始打包: {file_path}", log_file)
         print(f"\n[PACK INFO] 开始打包: {file_path}")
         output_dir = os.path.dirname(file_path) # 设置输出目录为 Pythonw 文件所在目录
-        if icon_path == "None":
-            command = f"pyinstaller --noconsole --onefile --distpath=\"{output_dir}\" \"{file_path}\""
+        if file_name in ["目录复制.pyw"]:
+            print(f"[WARNING] 使用notification！")
+            if icon_path == "None":
+                command = f"pyinstaller --hidden-import plyer.platforms.win.notification --noconsole --onefile --distpath={output_dir} {file_path}"
+            else:
+                command = f"pyinstaller --hidden-import plyer.platforms.win.notification --noconsole --onefile -i \"{icon_path}\" --distpath={output_dir} {file_path}"
         else:
-            command = f"pyinstaller --noconsole --onefile -i \"{icon_path}\" --distpath=\"{output_dir}\" \"{file_path}\""
+            if icon_path == "None":
+                command = f"pyinstaller --onefile --noconsole --distpath={output_dir} {file_path}"
+            else:
+                command = f"pyinstaller --onefile --noconsole -i \"{icon_path}\" --distpath={output_dir} {file_path}"
         subprocess.run(command, shell=True, check=True)
         if log_file != "None":
             log_message(f"打包完成：{file_path}", log_file)
@@ -125,11 +139,11 @@ if log_path == "None":
             file_path = os.path.join(root, file)
             # 根据文件后缀选择打包方式
             if file.endswith(".py"):
-                failed_file = package_py(file_path)
+                failed_file = package_py(file_path, file)
                 if failed_file:
                     failed_files.append(failed_file)
             elif file.endswith(".pyw"):
-                failed_file = package_pyw(file_path)
+                failed_file = package_pyw(file_path, file)
                 if failed_file:
                     failed_files.append(failed_file)
 else:
@@ -145,12 +159,12 @@ else:
                 file_path = os.path.join(root, file)
                 # 根据文件后缀选择打包方式
                 if file.endswith(".py"):
-                    failed_file = package_py(file_path, log_file)
+                    failed_file = package_py(file_path, file, log_file)
                     if failed_file:
                       failed_files.append(failed_file)
                     log_message(f"剩余待打包文件数量：{acount-fcount}", log_file)
                 elif file.endswith(".pyw"):
-                    failed_file = package_pyw(file_path, log_file)
+                    failed_file = package_pyw(file_path, file, log_file)
                     if failed_file:
                         failed_files.append(failed_file)
                     log_message(f"剩余待打包文件数量：{acount-fcount}", log_file)
