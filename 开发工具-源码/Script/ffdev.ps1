@@ -5,7 +5,7 @@ param(
 )
 
 $parentDir = Split-Path -Path $PSScriptRoot -Parent
-$version = "2024.10.01.0630"
+$version = "2024.10.25.1314"
 $flag = 0
 
 if ($program -eq "总调用") {
@@ -18,6 +18,8 @@ if ($program -eq "总调用") {
     $pythonScript = Join-Path $parentDir "代码校对\非UTF-8编码.py"
 } elseif ($program -eq "尾随空格") {
     $pythonScript = Join-Path $parentDir "代码校对\尾随空格.py"
+} elseif ($program -eq "末尾空行") {
+    $pythonScript = Join-Path $parentDir "代码校对\末尾空行.py"
 } elseif ($program -eq "需求生成") {
     $pythonScript = Join-Path $parentDir "生成工具\需求生成.py"
 } elseif ($program -eq "代码行数") {
