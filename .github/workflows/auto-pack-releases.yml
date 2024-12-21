@@ -50,15 +50,10 @@ jobs:
           echo ========================================
           tree /a /f
 
-      - name: 配置 Inno 中文翻译
+      - name: 打包安装程序
         run: |
           Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jrsoftware/issrc/main/Files/Languages/Unofficial/ChineseSimplified.isl" -OutFile "C:\Program Files (x86)\Inno Setup 6\Languages\ChineseSimplified.isl"
-
-      - name: 构建安装程序
-        uses: Minionguyjpro/Inno-Setup-Action@v1.2.5
-        with:
-          path: pack.iss
-          options: /O+
+          iscc pack.iss
 
       - name: 上传构建文件
         uses: actions/upload-artifact@v4
