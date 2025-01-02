@@ -15,8 +15,12 @@ def check_files(directory):
                         with open(filepath, 'rb') as file:
                             rawdata = file.read()
                             # 使用 chardet 库自动检测文件编码
-                            result = chardet.detect(rawdata)
-                            encoding = result['encoding']
+                            try:
+                                result = chardet.detect(rawdata)
+                                encoding = result['encoding']
+                            except Exception as e:
+                                encoding = "utf-8"
+                                print(f"{Fore.YELLOW}⚠{Fore.RESET} 无法检测文件 {Fore.BLUE}{filepath}{Fore.RESET} 的编码，将默认使用 UTF-8\n{Fore.YELLOW}⚠{Fore.RESET} {Fore.RED}{e}{Fore.RESET}")
                             with open(filepath, 'r', encoding=encoding) as decoded_file:
                                 for line in decoded_file:
                                     last_line = line

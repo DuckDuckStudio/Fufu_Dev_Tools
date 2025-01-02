@@ -18,6 +18,8 @@ if ($tool -eq "总调用") {
     $pythonScript = Join-Path $parentDir "代码校对\非UTF-8编码.py"
 } elseif ($tool -eq "尾随空格") {
     $pythonScript = Join-Path $parentDir "代码校对\尾随空格.py"
+} elseif ($tool -eq "末尾空行") {
+    $pythonScript = Join-Path $parentDir "代码校对\末尾空行.py"
 } elseif ($tool -eq "需求生成") {
     $pythonScript = Join-Path $parentDir "生成工具\需求生成.py"
 } elseif ($tool -eq "代码行数") {
