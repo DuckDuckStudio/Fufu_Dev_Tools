@@ -1,7 +1,7 @@
 [Setup]
 AppName=芙芙工具箱开发工具包
-AppVersion=2024.11.27.2000
-VersionInfoVersion=2024.11.27.2000
+AppVersion=2025.01.02.2300
+VersionInfoVersion=2025.01.02.2300
 AppPublisher=DuckStudio
 VersionInfoCopyright=Copyright (c) 鸭鸭「カモ」
 AppPublisherURL=https://duckduckstudio.github.io/yazicbs.github.io/
@@ -9,7 +9,7 @@ DefaultDirName={autopf}\Fufu_Dev_Tools
 DefaultGroupName=芙芙工具箱开发工具包
 UninstallDisplayIcon={app}\Script\ffdev.exe
 OutputDir=构建文件
-OutputBaseFilename=Fufu_Dev_Tools_Setup_2024.11.27.2000
+OutputBaseFilename=Fufu_Dev_Tools_Setup_2025.01.02.2300
 SetupIconFile=Fufu_Tools\ico.ico
 LicenseFile=LICENSE-GBK
 Compression=lzma2
