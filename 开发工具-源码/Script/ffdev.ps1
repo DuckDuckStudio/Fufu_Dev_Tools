@@ -11,7 +11,7 @@ $flag = 0
 if ($tool -eq "总调用") {
     $pythonScript = Join-Path $parentDir "总调用.py"
 } elseif ($tool -eq "目录复制") {
-    $pythonScript = Join-Path $parentDir "目录复制.py"
+    $pythonScript = Join-Path $parentDir "目录复制.pyw"
 } elseif ($tool -eq "参数查重") {
     $pythonScript = Join-Path $parentDir "代码校对\参数查重.py"
 } elseif ($tool -eq "非UTF-8编码") {

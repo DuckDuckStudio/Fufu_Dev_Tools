@@ -25,7 +25,8 @@ def main():
         "账号切换": "git/账号切换.exe",
         "连续push": "git/连续push尝试.exe",
         "连续pull": "git/连续pull尝试.exe",
-        "git连续尝试": "git/git连续尝试.exe"
+        "git连续尝试": "git/git连续尝试.exe",
+        "目录复制": "目录复制.exe"
     }
 
     if program in ["ver", "版本", "version", "Version", "--version", "--ver", "-v"]:
