@@ -35,9 +35,9 @@ jobs:
       - name: 获取新的 LICENSE 文件中的版本号
         if: env.up-to-date == 'false'
         run: |
-          # 从 LICENSE 文件中获取版本号，假设版本号在文件的第二行
-          version=$(awk 'NR==2 {print \$2}' LICENSE)  # 获取 LICENSE 文件第二行的版本号
-          echo "LICENSE_VERSION=${version}" >> $GITHUB_ENV  # 将版本号保存到环境变量中
+          # 从许可文件中获取版本号
+          version=$(grep -o 'v[0-9]\+\.[0-9]\+\.[0-9]\+' LICENSE)
+          echo "LICENSE_VERSION=${version}" >> $GITHUB_ENV
 
       - name: 推送修改
         if: env.up-to-date == 'false'
