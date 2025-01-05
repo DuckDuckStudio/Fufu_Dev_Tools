@@ -3,7 +3,7 @@ import sys
 from colorama import init, Fore
 init(autoreset=True)
 
-version = "2025.01.02.2300"
+version = "develop"
 
 def main():
     if len(sys.argv) < 2:
