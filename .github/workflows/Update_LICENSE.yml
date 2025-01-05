@@ -42,8 +42,8 @@ jobs:
       - name: 推送修改
         if: env.up-to-date == 'false'
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git checkout -b "LICENSE-${{ env.LICENSE_VERSION }}"
 
