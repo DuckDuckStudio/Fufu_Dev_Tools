@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: 检出开发工具仓库代码
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: 获取 LICENSE 文件
         run: |
