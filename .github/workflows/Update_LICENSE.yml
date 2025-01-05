@@ -31,6 +31,7 @@ jobs:
           else
             echo "[WARNING] 当前仓库中的许可文件已经过时，需要更新。"
             echo "up-to-date=false" >> $GITHUB_ENV
+          fi
 
       - name: 获取新的 LICENSE 文件中的版本号
         if: env.up-to-date == 'false'
