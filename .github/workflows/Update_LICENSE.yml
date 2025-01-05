@@ -16,22 +16,21 @@ jobs:
       - name: 检出开发工具仓库代码
         uses: actions/checkout@v4
 
-      - name: 获取 LICENSE 文件
-        run: |
-          # 克隆主仓库并获取 LICENSE 文件
-          git clone --branch main https://github.com/DuckDuckStudio/Fufu_Tools.git Fufu_Tools
-          cp Fufu_Tools/LICENSE . # 将主仓库的许可文件拷贝到当前仓库替换旧的许可文件
-
-      - name: 比较 LICENSE 文件是否有更新
-        run: |
-          # 比较当前仓库和主仓库的 LICENSE 文件是否相同
-          if cmp -s LICENSE Fufu_Tools/LICENSE; then
-            echo "🎉 当前仓库中的许可文件已经最新，无需更新。"
-            echo "up-to-date=true" >> $GITHUB_ENV
-          else
-            echo "[WARNING] 当前仓库中的许可文件已经过时，需要更新。"
-            echo "up-to-date=false" >> $GITHUB_ENV
-          fi
+        - name: 获取最新许可文件并比较
+          run: |
+            # 克隆主仓库并获取 LICENSE 文件
+            git clone --branch main https://github.com/DuckDuckStudio/Fufu_Tools.git Fufu_Tools
+            
+            # 比较当前仓库和主仓库的 LICENSE 文件是否相同
+            if cmp -s LICENSE Fufu_Tools/LICENSE; then
+              echo "🎉 当前仓库中的许可文件已经最新，无需更新。"
+              echo "up-to-date=true" >> $GITHUB_ENV
+            else
+              echo "[WARNING] 当前仓库中的许可文件已经过时，需要更新。"
+              echo "up-to-date=false" >> $GITHUB_ENV
+              # 将主仓库的许可文件拷贝到当前仓库替换旧的许可文件
+              cp Fufu_Tools/LICENSE . 
+            fi
 
       - name: 获取新的 LICENSE 文件中的版本号
         if: env.up-to-date == 'false'
