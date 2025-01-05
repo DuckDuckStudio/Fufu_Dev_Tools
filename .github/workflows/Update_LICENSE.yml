@@ -63,6 +63,6 @@ jobs:
             --body "此拉取请求通过 [工作流](https://github.com/DuckDuckStudio/Fufu_Dev_Tools/actions/runs/${{ github.run_id }}) 自动创建，将仓库中的 LICENSE 文件更新至版本 ${{ env.LICENSE_VERSION }}。<br>在合并前请仔细检查。" \
             --base main \
             --head "LICENSE-${{ env.LICENSE_VERSION }}" \
-            --label "DEV-开发分支合并, DEV-需要注意, 内部任务" \
+            --label "DEV-开发分支合并,DEV-需要注意,内部任务" \
             --reviewer "Luna-Grace" \
             --reviewer "DuckDuckStudio"
