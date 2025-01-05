@@ -50,7 +50,7 @@ jobs:
           git add LICENSE
           git commit -m "[Auto] 更新许可文件至版本 ${version}"
 
-          git push origin "LICENSE-${{ env.LICENSE_VERSION }}"
+          git push origin "LICENSE-${{ env.LICENSE_VERSION }}" --force
 
       - name: 创建拉取请求
         if: env.up-to-date == 'false'
