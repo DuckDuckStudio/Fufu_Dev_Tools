@@ -4,9 +4,9 @@ on:
   schedule:
     - cron: '0 0 * * *' # 每天检查一次
 
-  # 监听主仓库中 LICENSE 文件的变化
-  #repository_dispatch:
-  #  types: [license-update]
+  # 监听主仓库中的修改通知
+  repository_dispatch:
+    types: [license-update]
 
 jobs:
   sync_license:
@@ -60,7 +60,7 @@ jobs:
           # 创建拉取请求
           gh pr create \
             --title "[Auto] 更新许可文件至版本 ${{ env.LICENSE_VERSION }}" \
-            --body "此拉取请求通过 [工作流](https://github.com/DuckDuckStudio/Fufu_Dev_Tools/actions/runs/${{ github.run_id }}) 自动创建，将仓库中的 LICENSE 文件更新至版本 ${{ env.LICENSE_VERSION }}。<br>在合并前请仔细检查。" \
+            --body "此拉取请求通过 [工作流](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) 自动创建，将仓库中的 LICENSE 文件更新至版本 ${{ env.LICENSE_VERSION }}。<br>在合并前请仔细检查。" \
             --base main \
             --head "LICENSE-${{ env.LICENSE_VERSION }}" \
             --label "DEV-开发分支合并,DEV-需要注意,内部任务" \
