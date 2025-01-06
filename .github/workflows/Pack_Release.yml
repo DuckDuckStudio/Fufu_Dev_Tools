@@ -1,8 +1,11 @@
 name: Pack Releases
-# 用的是 PowerShell
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 版本号 (不带v)
+        required: true
 
 jobs:
   auto-pack-releases:
@@ -15,7 +18,12 @@ jobs:
       - name: 配置 Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: 3.x
+
+      - name: 更新版本号
+        # 前面已经配置过 Python 了，这个脚本只用 os 和 sys 这两个标准库，不用再装依赖
+        run: |
+          python "自动化脚本/修改版本号.py" "${{ github.event.inputs.version }}"
 
       - name: 克隆主仓库
         run: |
@@ -43,8 +51,8 @@ jobs:
           python "自动化脚本\Auto-Pack-Pyinstaller.py"
           echo ========================================
           mkdir 构建文件
-          7z a "构建文件\Fufu_Tools_Dev_Tools.zip" "开发工具-源码"
-          7z a "构建文件\Fufu_Tools_Dev_Tools.7z" "开发工具-源码"
+          7z a "构建文件\Fufu_Tools_Dev_Tools_${{ github.event.inputs.version }}.zip" "开发工具-源码"
+          7z a "构建文件\Fufu_Tools_Dev_Tools_${{ github.event.inputs.version }}.7z" "开发工具-源码"
           copy "packaging_log.log" "构建文件\打包日志.log"
           copy "LICENSE" "构建文件\LICENSE"
           echo ========================================

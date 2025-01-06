@@ -1,0 +1,66 @@
+name: 同步主仓库的 LICENSE 文件
+
+on:
+  workflow_dispatch:
+  # 监听主仓库中的修改通知
+  repository_dispatch:
+    types: [license-update]
+
+jobs:
+  sync_license:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出开发工具仓库代码
+        uses: actions/checkout@v4
+
+      - name: 获取最新许可文件并比较
+        run: |
+          # 克隆主仓库并获取 LICENSE 文件
+          git clone --branch main https://github.com/DuckDuckStudio/Fufu_Tools.git Fufu_Tools
+          
+          # 比较当前仓库和主仓库的 LICENSE 文件是否相同
+          if cmp -s LICENSE Fufu_Tools/LICENSE; then
+            echo "🎉 当前仓库中的许可文件已经最新，无需更新。"
+            echo "up-to-date=true" >> $GITHUB_ENV
+          else
+            echo "[WARNING] 当前仓库中的许可文件已经过时，需要更新。"
+            echo "up-to-date=false" >> $GITHUB_ENV
+            # 将主仓库的许可文件拷贝到当前仓库替换旧的许可文件
+            cp Fufu_Tools/LICENSE . 
+          fi
+
+      - name: 获取新的 LICENSE 文件中的版本号
+        if: env.up-to-date == 'false'
+        run: |
+          # 从许可文件中获取版本号
+          version=$(grep -o 'v[0-9]\+\.[0-9]\+\.[0-9]\+' LICENSE)
+          echo "LICENSE_VERSION=${version}" >> $GITHUB_ENV
+
+      - name: 推送修改
+        if: env.up-to-date == 'false'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git checkout -b "LICENSE-${{ env.LICENSE_VERSION }}"
+
+          git add LICENSE
+          git commit -m "[Auto] 更新许可文件至版本 ${version}"
+
+          git push origin "LICENSE-${{ env.LICENSE_VERSION }}" --force
+
+      - name: 创建拉取请求
+        if: env.up-to-date == 'false'
+        env:
+            GH_TOKEN: ${{ github.token }}
+        run: |
+          # 创建拉取请求
+          gh pr create \
+            --title "[Auto] 更新许可文件至版本 ${{ env.LICENSE_VERSION }}" \
+            --body "此拉取请求通过 [工作流](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) 自动创建，将仓库中的 LICENSE 文件更新至版本 ${{ env.LICENSE_VERSION }}。<br>在合并前请仔细检查。" \
+            --base main \
+            --head "LICENSE-${{ env.LICENSE_VERSION }}" \
+            --label "DEV-开发分支合并,DEV-需要注意,内部任务" \
+            --reviewer "Luna-Grace" \
+            --reviewer "DuckDuckStudio"
