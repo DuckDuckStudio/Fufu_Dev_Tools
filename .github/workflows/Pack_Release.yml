@@ -21,6 +21,8 @@ jobs:
           python-version: 3.x
 
       - name: 更新版本号
+        env:
+          PYTHONIOENCODING: utf-8
         # 前面已经配置过 Python 了，这个脚本只用 os 和 sys 这两个标准库，不用再装依赖
         run: |
           python "自动化脚本/修改版本号.py" "${{ github.event.inputs.version }}"
