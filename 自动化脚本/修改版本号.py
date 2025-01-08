@@ -1,17 +1,15 @@
 import os
 import sys
 
-# GitHub Action - Windows 竟然只能输出英文 :(
-
 if len(sys.argv) != 2:
-    print("[ERROR] Usage: python xxx.py <New-version>")
+    print("[ERROR] 使用示例: python xxx.py <新版本号>")
     sys.exit(1)
 
 新版本号 = sys.argv[1]
 if not 新版本号:
-    print("[ERROR] Version cannot be empty")
+    print("[ERROR] 新版本号不能为空")
     sys.exit(1)
-print(f"[INFO] New version: {新版本号}")
+print(f"[INFO] 新版本号: {新版本号}")
 
 文件 = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0]))), "开发工具-打包", "Script", "ffdev.py")
 try:
@@ -26,7 +24,7 @@ try:
     with open(文件, 'w', encoding='utf-8') as f:
         f.write(内容)
 except Exception as e:
-    print(f"[ERROR] A error occurred when processing {文件}: {e}")
+    print(f"[ERROR] 处理 {文件} 时出错: {e}")
     sys.exit(1)
 
 文件 = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0]))), "开发工具-源码", "Script", "ffdev.ps1")
@@ -42,7 +40,7 @@ try:
     with open(文件, 'w', encoding='utf-8') as f:
         f.write(内容)
 except Exception as e:
-    print(f"[ERROR] A error occurred when processing {文件}: {e}")
+    print(f"[ERROR] 处理 {文件} 时出错: {e}")
     sys.exit(1)
 
 文件 = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0]))), "pack.iss")
@@ -58,9 +56,8 @@ try:
     with open(文件, 'w', encoding='utf-8') as f:
         f.write(内容)
 except Exception as e:
-    print(f"[ERROR] A error occurred when processing {文件}: {e}")
+    print(f"[ERROR] 处理 {文件} 时出错: {e}")
     sys.exit(1)
 
-# 请勿使用表情，GitHub Action 会有意见的 :(
-print("[INFO] Version number processing is complete for all files!")
+print("[INFO] 🎉 成功处理所有文件")
 sys.exit(0)
