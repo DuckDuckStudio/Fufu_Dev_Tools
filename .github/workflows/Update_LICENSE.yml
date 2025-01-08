@@ -27,7 +27,10 @@ jobs:
             echo "[WARNING] 当前仓库中的许可文件已经过时，需要更新。"
             echo "up-to-date=false" >> $GITHUB_ENV
             # 将主仓库的许可文件拷贝到当前仓库替换旧的许可文件
-            cp Fufu_Tools/LICENSE . 
+            cp Fufu_Tools/LICENSE LICENSE
+            rm -rf Fufu_Tools
+            rm -rf LICENSE-GBK
+            iconv -f UTF-8 -t GBK LICENSE > LICENSE-GBK
           fi
 
       - name: 获取新的 LICENSE 文件中的版本号
