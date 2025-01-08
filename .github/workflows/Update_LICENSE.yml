@@ -17,7 +17,7 @@ jobs:
       - name: 获取最新许可文件并比较
         run: |
           # 克隆主仓库并获取 LICENSE 文件
-          git clone --branch main https://github.com/fjwxzde/Fufu_Tools.git Fufu_Tools
+          git clone --branch main https://github.com/DuckDuckStudio/Fufu_Tools.git Fufu_Tools
           
           # 比较当前仓库和主仓库的 LICENSE 文件是否相同
           if (Compare-Object (Get-Content LICENSE) (Get-Content Fufu_Tools/LICENSE)) {
