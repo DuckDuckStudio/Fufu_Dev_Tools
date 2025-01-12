@@ -22,8 +22,8 @@ if len(sys.argv) != 2:
     sys.exit(1)
 
 新版本号 = sys.argv[1]
-if not 新版本号:
-    print("[ERROR] 新版本号不能为空")
+if (not 新版本号) or (新版本号.startswith('v')):
+    print(f"[ERROR] 新版本号为空或格式不正确，获取到的新版本号: {新版本号}")
     sys.exit(1)
 print(f"[INFO] 新版本号: {新版本号}")
 
