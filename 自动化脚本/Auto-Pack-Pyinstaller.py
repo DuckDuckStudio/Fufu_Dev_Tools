@@ -32,7 +32,7 @@ if not os.path.exists(folder_path):
     print(f"[ERROR] 指定的目录路径不存在")
     exit(1)
 
-icon_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0])))), "Fufu_Tools", "ico.ico")
+icon_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0])))), "Fufu_Tools", "src", "ico.ico")
 log_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0]))))
 
 if icon_path.startswith(("'", '"')) and icon_path.endswith(("'", '"')):
