@@ -111,5 +111,5 @@ jobs:
             Release/Fufu_Dev_Tools_Setup_${{ env.VERSION }}.exe
             Release/Fufu_Tools_Dev_Tools_${{ env.VERSION }}.zip
             Release/Fufu_Tools_Dev_Tools_${{ env.VERSION }}.7z
-            Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}_src.zip
-            Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}_src.7z
+            Release/Fufu_Tools_Dev_Tools_${{ env.VERSION }}_src.zip
+            Release/Fufu_Tools_Dev_Tools_${{ env.VERSION }}_src.7z
