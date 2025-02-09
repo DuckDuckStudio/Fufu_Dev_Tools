@@ -53,10 +53,10 @@ jobs:
           python "自动化脚本/修改版本号.py" "${{ env.VERSION }}"
 
       - name: 整理文件
-        shell: bash
+        shell: pwsh
         run: |
-          cp -rv src src-pack
-          rm src-pack/Script/ffdev.ps1
+          Copy-Item -Recurse -Verbose -Path "src" -Destination "src-pack"
+          Remove-Item -Path "src-pack\Script\ffdev.ps1"
 
       - name: 克隆主仓库
         run: |
@@ -69,7 +69,7 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller
           pip list
-          echo ========================================
+          Write-Host ========================================
           $upx_url = (Invoke-WebRequest -Uri https://api.github.com/repos/upx/upx/releases/latest).Content | ConvertFrom-Json | Select-Object -ExpandProperty assets | Where-Object { $_.name -like "*win64.zip" } | Select-Object -ExpandProperty browser_download_url
           Write-Host "[INFO] Latest UPX download URL: $upx_url"
           Invoke-WebRequest -Uri $upx_url -OutFile "upx-latest.zip"
@@ -82,19 +82,19 @@ jobs:
         shell: pwsh
         run: |
           python "自动化脚本/Auto-Pack-Pyinstaller.py"
-          echo ========================================
-          mkdir Release
+          Write-Host "========================================"
+          New-Item -ItemType Directory -Force -Path "Release"
           7z a "Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}_src.zip" "src"
           7z a "Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}_src.7z" "src"
           7z a "Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}.zip" "src-pack"
           7z a "Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}.7z" "src-pack"
-          copy "packaging_log.log" "Release\打包日志.log"
-          copy "LICENSE" "Release\LICENSE"
-          echo ========================================
+          Copy-Item "packaging_log.log" -Destination "Release\打包日志.log"
+          Copy-Item "LICENSE" -Destination "Release\LICENSE"
+          Write-Host "========================================"
           tree /a /f
-          echo ========================================
+          Write-Host "========================================"
           Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jrsoftware/issrc/main/Files/Languages/Unofficial/ChineseSimplified.isl" -OutFile "C:\Program Files (x86)\Inno Setup 6\Languages\ChineseSimplified.isl"
-          iscc pack.iss
+          iscc "pack.iss"
 
       - name: 上传构建文件
         if: ${{ github.event_name == 'workflow_dispatch' }}
@@ -111,3 +111,5 @@ jobs:
             Release/Fufu_Dev_Tools_Setup_${{ env.VERSION }}.exe
             Release/Fufu_Tools_Dev_Tools_${{ env.VERSION }}.zip
             Release/Fufu_Tools_Dev_Tools_${{ env.VERSION }}.7z
+            Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}_src.zip
+            Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}_src.7z
