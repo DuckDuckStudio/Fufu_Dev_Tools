@@ -20,7 +20,7 @@ Name: "chinesesimplified"; MessagesFile: "compiler:Languages\ChineseSimplified.i
 Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
 
 [Files]
-Source: "src-pack\*"; DestDir: "{app}" Flags: recursesubdirs
+Source: "src-pack\*"; DestDir: "{app}"; Flags: recursesubdirs
 
 [Icons]
 Name: "{group}\芙芙工具箱开发工具包"; Filename: "{app}\Script\ffdev.exe"
