@@ -52,12 +52,19 @@ jobs:
         run: |
           python "自动化脚本/修改版本号.py" "${{ env.VERSION }}"
 
+      - name: 整理文件
+        shell: bash
+        run: |
+          cp -rv src src-pack
+          rm src-pack/Script/ffdev.ps1
+
       - name: 克隆主仓库
         run: |
           git clone https://github.com/DuckDuckStudio/Fufu_Tools.git
 
       - name: 安装依赖
         # 包括开发工具包与打包工具的依赖
+        shell: pwsh
         run: |
           pip install -r requirements.txt
           pip install pyinstaller
@@ -69,17 +76,18 @@ jobs:
           7z x "upx-latest.zip" -o"."
 
       - name: 构建发行版
-        # 整理文件 > 打包 > 压缩
+        # 打包 > 压缩
         env:
           PYTHONIOENCODING: utf-8
+        shell: pwsh
         run: |
-          xcopy "开发工具-打包" "开发工具-打包-done" /E /I
-          echo ========================================
-          python "自动化脚本\Auto-Pack-Pyinstaller.py"
+          python "自动化脚本/Auto-Pack-Pyinstaller.py"
           echo ========================================
           mkdir Release
-          7z a "Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}.zip" "开发工具-源码"
-          7z a "Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}.7z" "开发工具-源码"
+          7z a "Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}_src.zip" "src"
+          7z a "Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}_src.7z" "src"
+          7z a "Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}.zip" "src-pack"
+          7z a "Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}.7z" "src-pack"
           copy "packaging_log.log" "Release\打包日志.log"
           copy "LICENSE" "Release\LICENSE"
           echo ========================================

@@ -19,7 +19,7 @@ pyw_acount = 0
 py_acount = 0
 
 # 文件夹路径
-folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0])))), "开发工具-打包-done")
+folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0])))), "src-pack")
 
 if folder_path.startswith(("'", '"')) and folder_path.endswith(("'", '"')):
     folder_path = folder_path[1:-1]

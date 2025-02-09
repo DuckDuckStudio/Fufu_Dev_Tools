@@ -1,4 +1,5 @@
 import os
+import sys
 import argparse
 import chardet
 from colorama import init, Fore
@@ -15,12 +16,8 @@ def check_files(directory):
                         with open(filepath, 'rb') as file:
                             rawdata = file.read()
                             # 使用 chardet 库自动检测文件编码
-                            try:
-                                result = chardet.detect(rawdata)
-                                encoding = result['encoding']
-                            except Exception as e:
-                                encoding = "utf-8"
-                                print(f"{Fore.YELLOW}⚠{Fore.RESET} 无法检测文件 {Fore.BLUE}{filepath}{Fore.RESET} 的编码，将默认使用 UTF-8\n{Fore.YELLOW}⚠{Fore.RESET} {Fore.RED}{e}{Fore.RESET}")
+                            result = chardet.detect(rawdata)
+                            encoding = result['encoding']
                             with open(filepath, 'r', encoding=encoding) as decoded_file:
                                 for line in decoded_file:
                                     last_line = line
@@ -43,11 +40,19 @@ def main(directory):
     if directory:
         check_files(directory)
         print(f"{Fore.GREEN}✓{Fore.RESET} 末尾空行检查完成。")
+        return 0
+    else:
+        print(f"{Fore.RED}✕{Fore.RESET} 请提供要检查的目录")
+        return 1
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="检查文件末尾是否为空行")
-    parser.add_argument("--dir", dest="directory", required=True, help="要检查的目录路径")
-    args = parser.parse_args()
+    try:
+        parser = argparse.ArgumentParser(description="检查文件末尾是否为空行")
+        parser.add_argument("--dir", dest="directory", required=True, help="要检查的目录路径")
+        args = parser.parse_args()
 
-    # 调用主函数
-    main(args.directory)
+        # 调用主函数
+        sys.exit(main(args.directory))
+    except KeyboardInterrupt:
+        print(f"{Fore.RED}✕{Fore.RESET} 用户已取消操作")
+        sys.exit(2)

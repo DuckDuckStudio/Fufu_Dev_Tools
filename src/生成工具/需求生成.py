@@ -67,23 +67,31 @@ def generate_requirements(directory_path, output_path, python_exec=None):
         for library in new_libraries:
             req_file.write(library + "\n")
 
+def main():
+    try:
+        parser = argparse.ArgumentParser(description="根据目录中的Python文件生成requirements.txt文件。")
+        parser.add_argument("--dir", type=str, required=True, help="包含Python文件的目录路径。")
+        parser.add_argument("--output", type=str, required=False, default="requirements.txt", help="requirements.txt文件的输出路径（完整路径）。")
+        parser.add_argument("--env", type=str, required=False, help="指定已有环境中的Python解释器，仅列出环境中还未安装的库。")
+        args = parser.parse_args()
+
+        directory_path = args.dir
+        output_path = args.output
+
+        if not output_path.endswith('.txt'):
+            if output_path.endswith('\\'):
+                output_path += 'requirements.txt'
+            else:
+                output_path += '\\requirements.txt'
+
+        python_exec = args.env
+
+        generate_requirements(directory_path, output_path, python_exec)
+        print(f"{Fore.GREEN}✓{Fore.RESET} 已将 requirements.txt 保存至 {Fore.BLUE}{output_path}{Fore.BLUE}")
+        return 0
+    except KeyboardInterrupt:
+        print(f"{Fore.RED}✕{Fore.RESET} 用户已取消操作")
+        return 2
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="根据目录中的Python文件生成requirements.txt文件。")
-    parser.add_argument("--dir", type=str, required=True, help="包含Python文件的目录路径。")
-    parser.add_argument("--output", type=str, required=False, default="requirements.txt", help="requirements.txt文件的输出路径（完整路径）。")
-    parser.add_argument("--env", type=str, required=False, help="指定已有环境中的Python解释器，仅列出环境中还未安装的库。")
-    args = parser.parse_args()
-
-    directory_path = args.dir
-    output_path = args.output
-
-    if not output_path.endswith('.txt'):
-        if output_path.endswith('\\'):
-            output_path += 'requirements.txt'
-        else:
-            output_path += '\\requirements.txt'
-
-    python_exec = args.env
-
-    generate_requirements(directory_path, output_path, python_exec)
-    print(f"{Fore.GREEN}✓{Fore.RESET} 已将 requirements.txt 保存至 {Fore.BLUE}{output_path}{Fore.BLUE}")
+    sys.exit(main())

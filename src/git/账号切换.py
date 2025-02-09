@@ -86,29 +86,32 @@ def show_git_config():
     return 0
 
 def main():
-    parser = argparse.ArgumentParser(description='账号切换')
-    parser.add_argument('--fast', action='store_true', help='快速切换模式')
-    parser.add_argument('--edit', action='store_true', help='编辑 accounts.json 文件')
-    parser.add_argument('--show', action='store_true', help='显示现有配置')
-    parser.add_argument('--name', action='store_true', help='仅切换 Git 用户名')
-    parser.add_argument('--email', action='store_true', help='仅切换 Git 邮箱')
-    parser.add_argument('alias', metavar='ALIAS', type=str, nargs='?', help='用户名/别名')
-    
-    args = parser.parse_args()
-    script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-    
-    if args.edit:
-        return(edit_json_file(script_dir))
-    elif args.show:
-        return(show_git_config())
-    elif args.alias:
-        switch_name = not args.email # 如果未提供 --email 参数，切换用户名
-        switch_email = not args.name # 如果未提供 --name 参数，切换邮箱
-        return(switch_git_config(args.alias, args.fast, switch_name, switch_email))
-    else:
-        print(f"{Fore.RED}✕{Fore.RESET} 请提供一个别名或者使用 --edit 参数来编辑 accounts.json 文件")
-        return 1
-    # 每个判断都有 return 了这里就不用加
+    try:
+        parser = argparse.ArgumentParser(description='账号切换')
+        parser.add_argument('--fast', action='store_true', help='快速切换模式')
+        parser.add_argument('--edit', action='store_true', help='编辑 accounts.json 文件')
+        parser.add_argument('--show', action='store_true', help='显示现有配置')
+        parser.add_argument('--name', action='store_true', help='仅切换 Git 用户名')
+        parser.add_argument('--email', action='store_true', help='仅切换 Git 邮箱')
+        parser.add_argument('alias', metavar='ALIAS', type=str, nargs='?', help='用户名/别名')
+        
+        args = parser.parse_args()
+        script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+        
+        if args.edit:
+            return(edit_json_file(script_dir))
+        elif args.show:
+            return(show_git_config())
+        elif args.alias:
+            switch_name = not args.email # 如果未提供 --email 参数，切换用户名
+            switch_email = not args.name # 如果未提供 --name 参数，切换邮箱
+            return(switch_git_config(args.alias, args.fast, switch_name, switch_email))
+        else:
+            print(f"{Fore.RED}✕{Fore.RESET} 请提供一个别名或者使用 --edit 参数来编辑 accounts.json 文件")
+            return 1
+    except KeyboardInterrupt:
+        print(f"{Fore.RED}✕{Fore.RESET} 用户已取消操作")
+        return 2
 
 if __name__ == "__main__":
     sys.exit(main())
