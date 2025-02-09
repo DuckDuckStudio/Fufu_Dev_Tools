@@ -1,4 +1,5 @@
 import os
+import sys
 import argparse
 import chardet
 from colorama import init, Fore
@@ -42,15 +43,23 @@ def main(directory, file_extensions):
     if directory:
         check_files(directory, file_extensions)
         print(f"{Fore.GREEN}✓{Fore.RESET} 编码检查完成。")
+        return 0
+    else:
+        print(f"{Fore.RED}✕{Fore.RESET} 请提供要检查的目录")
+        return 1
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="检查指定目录下的文件是否存在非UTF-8编码的文件")
-    parser.add_argument("--file_extensions", dest="file_extensions", type=str, help="要检查的文件扩展名列表，以 , 分隔")
-    parser.add_argument("--dir", dest="directory", required=True, help="要检查的目录路径")
-    args = parser.parse_args()
+    try:
+        parser = argparse.ArgumentParser(description="检查指定目录下的文件是否存在非UTF-8编码的文件")
+        parser.add_argument("--file_extensions", dest="file_extensions", type=str, help="要检查的文件扩展名列表，以 , 分隔")
+        parser.add_argument("--dir", dest="directory", required=True, help="要检查的目录路径")
+        args = parser.parse_args()
 
-    # 将逗号分隔的字符串转换为列表
-    file_extensions = args.file_extensions.split(',') if args.file_extensions else []
+        # 将逗号分隔的字符串转换为列表
+        file_extensions = args.file_extensions.split(',') if args.file_extensions else []
 
-    # 调用主函数
-    main(args.directory, file_extensions)
+        # 调用主函数
+        sys.exit(main(args.directory, file_extensions))
+    except KeyboardInterrupt:
+        print(f"{Fore.RED}✕{Fore.RESET} 用户已取消操作")
+        sys.exit(2)

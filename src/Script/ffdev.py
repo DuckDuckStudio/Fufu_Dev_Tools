@@ -37,7 +37,7 @@ def main():
 
     if program not in scripts:
         print(f"{Fore.YELLOW}⚠{Fore.RESET} 无效的程序调用")
-        print(f"{Fore.BLUE}[!]{Fore.RESET} 可用程序: [总调用] [目录复制] [参数查重] [非UTF-8编码] [尾随空格] [需求生成] [代码行数] [账号切换] [连续push] [连续pull] [git连续尝试]")
+        print(f"{Fore.BLUE}[!]{Fore.RESET} 可用程序: [目录复制] [参数查重] [非UTF-8编码] [尾随空格] [需求生成] [代码行数] [账号切换] [连续push] [连续pull] [git连续尝试]")
         return
 
     program_path = os.path.normpath(os.path.join(parent_dir, scripts[program]))

@@ -29,8 +29,8 @@ print(f"[INFO] 新版本号: {新版本号}")
 
 # 文件路径和替换规则
 文件和替换规则 = [
-    (os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0]))), "开发工具-打包", "Script", "ffdev.py"), 'version = "develop"', f'version = "{新版本号}"'),
-    (os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0]))), "开发工具-源码", "Script", "ffdev.ps1"), '$version = "develop"', f'$version = "{新版本号}"'),
+    (os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0]))), "src", "Script", "ffdev.py"), 'version = "develop"', f'version = "{新版本号}"'),
+    (os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0]))), "src", "Script", "ffdev.ps1"), '$version = "develop"', f'$version = "{新版本号}"'),
     (os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0]))), "pack.iss"), 'develop', 新版本号)
 ]
 
