@@ -56,7 +56,7 @@ jobs:
         shell: pwsh
         run: |
           Copy-Item -Recurse -Verbose -Path "src" -Destination "src-pack"
-          Remove-Item -Path "src-pack\Script\ffdev.ps1"
+          Remove-Item -Verbose -Path "src-pack\Script\ffdev.ps1"
 
       - name: 克隆主仓库
         run: |
@@ -83,7 +83,7 @@ jobs:
         run: |
           python "自动化脚本/Auto-Pack-Pyinstaller.py"
           Write-Host "========================================"
-          New-Item -ItemType Directory -Force -Path "Release"
+          New-Item -ItemType Directory -Path "Release"
           7z a "Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}_src.zip" "src"
           7z a "Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}_src.7z" "src"
           7z a "Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}.zip" "src-pack"
