@@ -81,12 +81,16 @@ def main():
             elif is_network_error(output):
                 print(f"{Fore.YELLOW}⚠{Fore.RESET} 第 {Fore.BLUE}{counter}{Fore.RESET} 次运行尝试失败")
                 print(f"原因:\n{Fore.RED}{output}{Fore.RESET}")
-                temp = time_counter
-                for i in range(time_counter, 0, -1):
-                    print(f"\r{i}秒后重试...", end="")
-                    time.sleep(1)
-                print("\r重试中...")
-                time_counter = temp # 还原秒数设置
+                try:
+                    temp = time_counter
+                    for i in range(time_counter, 0, -1):
+                        print(f"\r{i}秒后重试...", end="")
+                        time.sleep(1)
+                    print("\r重试中...")
+                    time_counter = temp # 还原秒数设置
+                except KeyboardInterrupt:
+                    print(f"\r{Fore.RED}✕{Fore.RESET} 用户已取消操作")
+                    return 2
             else:
                 print(f"{Fore.RED}✕{Fore.RESET} 第 {Fore.BLUE}{counter}{Fore.RESET} 次运行尝试失败，出现了非已知网路问题\n{Fore.BLUE}[提示]{Fore.RESET} 如果你确定这是网络问题，请提交issue或者PR，感谢！")
                 print(f"原因:\n{Fore.RED}{output}{Fore.RESET}")
