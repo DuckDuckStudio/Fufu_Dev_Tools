@@ -8,8 +8,7 @@
 
 > [!NOTE]
 > 此仓库的代码为芙芙工具箱的开发工具，此仓库会发布独立开发工具包，你可以在两个仓库中的任意一个仓库提交Issue。  
-> 芙芙工具箱:  
-> [![项目网站仓库](https://github-stats.ubrong.com/api/pin/?username=DuckDuckStudio&repo=Fufu_Tools)](https://github.com/DuckDuckStudio/Fufu_Tools)  
+> 芙芙工具箱: [DuckDuckStudio/Fufu_Tools](https://github.com/DuckDuckStudio/Fufu_Tools)  
 
 **如果您对使用方法有任何疑问，请先阅读[文档](https://duckduckstudio.github.io/yazicbs.github.io/Tools/Fufu_Tools/wiki/)**。  
 
@@ -56,10 +55,6 @@
 我们不会回复任何无意义、具有侮辱性等的问题或意见。  
 我们不能保证此项目中的小工具在所有Windows系统上适用，请前往芙芙工具箱网页查看系统要求，我们**不对您使用小工具所造成的任何问题负责**。  
 
-## 项目公告
-
-*[20240622]已将开发工具Fork到本仓库。*  
-
 ### 开发状况
 [[查看芙芙工具箱开发规划]](https://github.com/users/DuckDuckStudio/projects/2)  
 ![Alt](https://repobeats.axiom.co/api/embed/891e77184ece1f4237e086442c5539d0905ecda6.svg "Repobeats analytics image")  
@@ -74,7 +69,5 @@
 <a href="https://space.bilibili.com/2054654702">
     <img src="https://duckduckstudio.github.io/yazicbs.github.io/project_photos/Bilibili-Account.png" alt=My-Bilibili-Account width="30%" height="30%">
 </a><br />
-
-> 本说明文件使用[Markdown语法](https://markdown.com.cn/basic-syntax/)编辑。  
 
 个人网站：[DuckStudio](https://duckduckstudio.github.io/yazicbs.github.io/)  
