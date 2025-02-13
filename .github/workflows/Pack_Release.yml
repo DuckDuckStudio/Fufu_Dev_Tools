@@ -56,7 +56,7 @@ jobs:
         shell: pwsh
         run: |
           Copy-Item -Recurse -Verbose -Path "src" -Destination "src-pack"
-          Remove-Item -Path "src-pack\Script\ffdev.ps1"
+          Remove-Item -Verbose -Path "src-pack\Script\ffdev.ps1"
 
       - name: 克隆主仓库
         run: |
