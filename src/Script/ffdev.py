@@ -50,7 +50,6 @@ def main():
         command_args = [command] + input_args
         return os.system(f'"{program_path}" {" ".join(command_args)}')
     except KeyboardInterrupt:
-        print(f"{Fore.RED}✕{Fore.RESET} 用户已取消操作")
         return 2
 
 if __name__ == "__main__":
