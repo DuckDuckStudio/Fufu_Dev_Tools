@@ -83,7 +83,7 @@ jobs:
         run: |
           python "自动化脚本/Auto-Pack-Pyinstaller.py"
           Write-Host "========================================"
-          New-Item -ItemType Directory -Force -Path "Release"
+          New-Item -ItemType Directory -Path "Release"
           7z a "Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}_src.zip" "src"
           7z a "Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}_src.7z" "src"
           7z a "Release\Fufu_Tools_Dev_Tools_${{ env.VERSION }}.zip" "src-pack"
