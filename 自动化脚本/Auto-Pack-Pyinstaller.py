@@ -96,7 +96,6 @@ def package_py(file_path, file_name, log_file="None"):
         fcount += 1
         print(f"[PACK INFO] 还剩 {acount-fcount} 个文件待打包。")
         sys.exit(1)
-        return file_path
 
 # 函数：打包 Pythonw 文件
 def package_pyw(file_path, file_name, log_file="None"):
@@ -132,7 +131,6 @@ def package_pyw(file_path, file_name, log_file="None"):
         fcount += 1
         print(f"[PACK INFO] 还剩 {acount-fcount} 个文件待打包。")
         sys.exit(1)
-        return file_path
 
 if log_path == "None":
     failed_files = [] # 存储打包失败的文件名
@@ -143,13 +141,9 @@ if log_path == "None":
             file_path = os.path.join(root, file)
             # 根据文件后缀选择打包方式
             if file.endswith(".py"):
-                failed_file = package_py(file_path, file)
-                if failed_file:
-                    failed_files.append(failed_file)
+                package_py(file_path, file)
             elif file.endswith(".pyw"):
-                failed_file = package_pyw(file_path, file)
-                if failed_file:
-                    failed_files.append(failed_file)
+                package_pyw(file_path, file)
 else:
     with open(f"{log_path}packaging_log.log", "a", encoding='utf-8') as log_file:
         # 打开日志文件，准备记录日志
@@ -163,14 +157,10 @@ else:
                 file_path = os.path.join(root, file)
                 # 根据文件后缀选择打包方式
                 if file.endswith(".py"):
-                    failed_file = package_py(file_path, file, log_file)
-                    if failed_file:
-                      failed_files.append(failed_file)
+                    package_py(file_path, file, log_file)
                     log_message(f"剩余待打包文件数量：{acount-fcount}", log_file)
                 elif file.endswith(".pyw"):
-                    failed_file = package_pyw(file_path, file, log_file)
-                    if failed_file:
-                        failed_files.append(failed_file)
+                    package_pyw(file_path, file, log_file)
                     log_message(f"剩余待打包文件数量：{acount-fcount}", log_file)
 
 # 删除指定格式的文件

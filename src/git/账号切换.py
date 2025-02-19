@@ -28,16 +28,16 @@ def switch_git_config(alias, fast_switch=False, switch_name=True, switch_email=T
         if not matched_users:
             print(f'{Fore.RED}✕{Fore.RESET} 在accounts.json中未找到与"{alias}"匹配的用户')
             return 1
-        if len(matched_users) > 1:
+        elif len(matched_users) > 1:
             print(f'{Fore.RED}✕{Fore.RESET} 在accounts.json中找到多个与"{alias}"匹配的用户：{", ".join(matched_users)}。请提供更具体的别名。')
             return 1
     else:
-        name_users = [user for user, info in accounts.items() if alias == info.get('name')]
-        if not name_users:
+        matched_users = [user for user, info in accounts.items() if alias == info.get('name')]
+        if not matched_users:
             print(f'{Fore.RED}✕{Fore.RESET} 在accounts.json中未找到与"{alias}"匹配的用户')
             print(f'{Fore.BLUE}[!]{Fore.RESET} 提示：如需使用别名请添加{Fore.BLUE}--fast{Fore.RESET}参数。')
             return 1
-        if len(name_users) > 1:
+        elif len(matched_users) > 1:
             print(f'{Fore.RED}✕{Fore.RESET} 在accounts.json中找到多个与"{alias}"匹配的用户：{", ".join(matched_users)}。请提供更具体的别名。')
             return 1
     
@@ -99,13 +99,13 @@ def main():
         script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
         
         if args.edit:
-            return(edit_json_file(script_dir))
+            return edit_json_file(script_dir)
         elif args.show:
-            return(show_git_config())
+            return show_git_config()
         elif args.alias:
             switch_name = not args.email # 如果未提供 --email 参数，切换用户名
             switch_email = not args.name # 如果未提供 --name 参数，切换邮箱
-            return(switch_git_config(args.alias, args.fast, switch_name, switch_email))
+            return switch_git_config(args.alias, args.fast, switch_name, switch_email)
         else:
             print(f"{Fore.RED}✕{Fore.RESET} 请提供一个别名或者使用 --edit 参数来编辑 accounts.json 文件")
             return 1

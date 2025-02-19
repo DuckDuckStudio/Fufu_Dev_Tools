@@ -15,8 +15,8 @@ def push_commits(working_dir): # push提交
             return "push successful"
         else:
             return result.stderr
-    except Exception:
-        return result.stderr
+    except Exception as e:
+        return e
 
 def is_network_error(stderr): # 判断错误类型
     network_error_keywords = [

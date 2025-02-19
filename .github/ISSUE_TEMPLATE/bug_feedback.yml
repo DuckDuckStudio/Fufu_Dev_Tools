@@ -69,7 +69,7 @@ body:
         --- Installed library files ---
         Package                   Version
         ------------------------- --------
-        <pachage>                 <version>
+        <package>                 <version>
         --- Directory where Fufu Tools is located ---
         <directory>
         --- Network connection status ---
