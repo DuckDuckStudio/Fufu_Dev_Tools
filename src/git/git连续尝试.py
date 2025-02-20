@@ -15,8 +15,8 @@ def run_commits(working_dir, command):
             return "successful"
         else:
             return result.stderr
-    except Exception:
-        return result.stderr
+    except Exception as e:
+        return e
     
 def is_network_error(stderr): # 判断错误类型
     network_error_keywords = [
