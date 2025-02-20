@@ -11,7 +11,6 @@ print(f"[!] 将使用 Pyinstaller 打包。")
 # 在代码中是 --upx-dir \"upx-latest\"
 
 # 计数
-fail = 0 # 失败的文件个数
 countd = 0 # 已删除的文件个数
 acount = 0 # 总文件个数
 fcount = 0 # 已打包的文件个数
@@ -65,7 +64,6 @@ def log_message(message, log_file):
 # 函数：打包 Python 文件
 def package_py(file_path, file_name, log_file="None"):
     global fcount
-    global fail
     try:
         if log_file != "None":
             log_message(f"\n开始打包：{file_path}", log_file)
@@ -92,7 +90,6 @@ def package_py(file_path, file_name, log_file="None"):
         if log_file != "None":
             log_message(f"打包 {file_path} 时出错:\n{e}", log_file)
         print(f"[ERROR] 打包 {file_path} 时出错:\n{e}")
-        fail += 1
         fcount += 1
         print(f"[PACK INFO] 还剩 {acount-fcount} 个文件待打包。")
         sys.exit(1)
@@ -100,7 +97,6 @@ def package_py(file_path, file_name, log_file="None"):
 # 函数：打包 Pythonw 文件
 def package_pyw(file_path, file_name, log_file="None"):
     global fcount
-    global fail
     try:
         if log_file != "None":
             log_message(f"\n开始打包: {file_path}", log_file)
@@ -127,14 +123,11 @@ def package_pyw(file_path, file_name, log_file="None"):
         if log_file != "None":
             log_message(f"打包 {file_path} 时出错:\n{e}", log_file)
         print(f"[ERROR] 打包 {file_path} 时出错:\n{e}")
-        fail += 1
         fcount += 1
         print(f"[PACK INFO] 还剩 {acount-fcount} 个文件待打包。")
         sys.exit(1)
 
 if log_path == "None":
-    failed_files = [] # 存储打包失败的文件名
-
     # 遍历文件夹中的所有文件
     for root, dirs, files in os.walk(folder_path):
         for file in files:
@@ -148,8 +141,6 @@ else:
     with open(f"{log_path}packaging_log.log", "a", encoding='utf-8') as log_file:
         # 打开日志文件，准备记录日志
         log_message(f"开始打包，需要打包的文件数量：{acount}", log_file)
-
-        failed_files = [] # 存储打包失败的文件名
 
         # 遍历文件夹中的所有文件
         for root, dirs, files in os.walk(folder_path):
