@@ -1,5 +1,6 @@
 import os
 import sys
+import subprocess
 from colorama import init, Fore
 init(autoreset=True)
 
@@ -12,8 +13,7 @@ def main():
             return 2
 
         program = sys.argv[1]
-        command = sys.argv[2] if len(sys.argv) > 2 else ""
-        input_args = sys.argv[3:]
+        args = sys.argv[2:]
 
         parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0])))
 
@@ -47,8 +47,8 @@ def main():
             print(f"{Fore.RED}✕{Fore.RESET} 缺少工具 {Fore.BLUE}{program_path}{Fore.RESET} !\n{Fore.YELLOW}⚠{Fore.RESET} 尝试重新安装程序以解决该问题")
             return 1
 
-        command_args = [command] + input_args
-        return os.system(f'"{program_path}" {" ".join(command_args)}')
+        result = subprocess.run([program_path] + args)
+        return result.returncode
     except KeyboardInterrupt:
         return 2
 
