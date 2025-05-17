@@ -67,7 +67,7 @@
 ~~我可能真的只是个废物，有些BUG是真的不会修...~~  
 
 <a href="https://space.bilibili.com/2054654702">
-    <img src="https://duckduckstudio.github.io/yazicbs.github.io/project_photos/Bilibili-Account.png" alt=My-Bilibili-Account width="30%" height="30%">
+    <img src="https://duckduckstudio.github.io/yazicbs.github.io/pictures/docs/Bilibili-Account.png" alt=My-Bilibili-Account width="30%" height="30%">
 </a><br />
 
 个人网站：[DuckStudio](https://duckduckstudio.github.io/yazicbs.github.io/)  
