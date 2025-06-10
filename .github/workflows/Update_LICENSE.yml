@@ -6,6 +6,10 @@ on:
   repository_dispatch:
     types: [license-update]
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   sync_license:
     runs-on: windows-latest
