@@ -13,6 +13,7 @@ SetupIconFile=Fufu_Tools\Installer\Fufu_Tools_Setup_ico.ico
 LicenseFile=LICENSE-GBK
 Compression=lzma2
 SolidCompression=yes
+ArchitecturesInstallIn64BitMode=x64compatible
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
