@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: 检出开发工具仓库代码
-        uses: actions/checkout@v6.0.0
+        uses: actions/checkout@v6.0.1
 
       - name: 获取最新许可文件并比较
         run: |
